@@ -1,4 +1,33 @@
 <view class="container">
-  <image src="{{cartImg}}" class="cart-image"/>
-  <view>{{tipWords}}</view>
+  <view class="page-box" wx:if="{{!showEmpty}}">
+    <view class="pro-list">
+      <block wx:for="list" wx:key="index">
+        <view class="pro-item">
+          <view class="item-check">
+            <checkbox value="{{item.checked}}" checked="{{item.checked}}"/>
+          </view>
+          <view class="item-img">
+            <image src="{{item.img}}"></image>
+          </view>
+          <view class="item-info">
+            <view class="item-title">{{item.goodsname}}</view>
+            <view class="item-title">{{item.remark}} 余量{{item.rest}}</view>
+            <view class="item-title">￥{{item.price}}</view>
+            <view class="item.count">
+              <view class="count-box">
+                <view class="btn btn-left" bindtap="reduceNum">—</view>
+                <input class="count-input" maxlength="10" type="number" value="{{item.count}}" />
+                <view class="btn btn-right" bindtap="addNum">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="page-btm"></view>
+  </view>
+  <view wx:if="{{showEmpty}}">
+    <image src="{{cartImg}}" class="cart-image"/>
+    <view>{{tipWords}}</view>
+  </view>
 </view>

@@ -32,6 +32,7 @@ App({
     console.log('App Hide')
   },
   globalData:{
-    userInfo:null
+    userInfo:null,
+    urlParam: null
   }
 })

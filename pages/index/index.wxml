@@ -3,9 +3,9 @@
     <view>
         <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
                 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
-            <block wx:for="{{images}}">
+            <block wx:for="{{images}}" wx:key="index">
                 <swiper-item>
-                    <image src="{{item.picurl}}" class="slide-image"/>
+                    <image src="{{item.url}}" class="slide-image"/>
                 </swiper-item>
             </block>
         </swiper>
@@ -13,41 +13,30 @@
 
     <view class="text">
         <view class="line_flag"></view>
-        <text>主题馆</text>
+        <text>列表</text>
     </view>
-    
-    <view class="venues_box">
-        <view class="venues_list">
-            <block wx:for="{{venuesItems}}">
-                <view class="venues_item">
-                    <navigator url="../brand/index?id={{item.id}}">
-                        <image src="{{item.smallpic}}"/>
-                    </navigator>
+
+    <view class="choice_box">
+        <view class="choice_list">
+            <block wx:for="{{choiceItems}}"  wx:key="index">
+                <view class="choice_item">
+                    <image src="{{item.img}}"/>
+                    <view class="info-box">
+                        <view class="ib-left">
+                            <view class="title">{{item.goodsname}}</view>
+                            <view class="price">￥{{item.price}}</view>
+                        </view>
+                        <view class="ib-right">
+                            <image src="../../images/addcar.png" bindtap="addCar" data-id="{{item.id}}" />
+                        </view>
+                    </view>
                 </view>
             </block>
         </view>
     </view>
 
-    <view class="text">
-        <view class="line_flag"></view>
-        <text>环球精选</text>
-    </view>
-
-    <view class="choice_box">
-        <view class="choice_list">
-            <block wx:for="{{choiceItems}}">
-                <navigator url="../details/index?id={{item.id}}">
-                    <view class="choice_item">
-                        <image src="{{item.goodspics}}"/>
-                        <view class="title">{{item.title}}</view>
-                    </view>
-                </navigator>
-            </block>
-        </view>
-    </view>
-
-    <loading hidden="{{loadingHidden}}">
+    <!-- <loading hidden="{{loadingHidden}}">
         加载中...
-    </loading>
+    </loading> -->
 
 </view>

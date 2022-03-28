@@ -63,17 +63,47 @@ view.text text {
 .choice_box {
     padding: 0 10rpx;
 }
-.choice_box .choice_list .choice_item{
-    margin-bottom: 15px;
+.choice_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 10px;
 }
-.choice_box .choice_list image {
+.choice_item{
+    margin-bottom: 15px;
+    width: 48%;
+}
+.choice_item image {
     width: 100%;
-    height: 200px;
+    height: 150px;
+    object-fit: contain;
+}
+.info-box{
+    display: flex;
+    justify-content: space-between;
+}
+.info-box .ib-left {
+    flex: 1;
+}
+.info-box .ib-right{
+    align-self: flex-end;
+    margin: 0 10px;
+}
+.info-box .ib-right image{
+    width: 20px;
+    height: 20px;
 }
 
-.choice_box .choice_list .title {
+.info-box .title {
     font-size: 12px;
     font-weight: bold;
-    text-align: center;
     color: #333;
+    margin: 3px 0;
 }
+
+.info-box .price{
+    color: #999;
+    font-size: 12px;
+    margin: 3px 0;
+}
+
