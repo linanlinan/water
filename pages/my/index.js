@@ -5,8 +5,8 @@ Page( {
     projectSource: 'https://github.com/liuxuanqiang/wechat-weapp-mall',
     userListInfo: [
       {
-      icon: '../../images/iconfont-dingdan.png',
-      text: '我的订单'
+        icon: '../../images/iconfont-dingdan.png',
+        text: '我的订单'
       }, {
         icon: '../../images/iconfont-tuihuo.png',
         text: '押金退还',

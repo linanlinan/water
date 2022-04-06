@@ -7,17 +7,18 @@
   flex-direction: column;
   padding: 50rpx 0;
   align-items: center;
-  background: red;
   color: #fff;
+  border-bottom: 1px solid #ddd;
 }
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
+  border: 1px solid #ddd;
 }
 .userinfo-nickname {
-  color: #fff;
+  color: #333;
 }
 .weui_cell{
     position: relative;
