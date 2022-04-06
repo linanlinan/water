@@ -1,30 +1,42 @@
 <view class="container">
   <view class="page-box" wx:if="{{!showEmpty}}">
     <view class="pro-list">
-      <block wx:for="list" wx:key="index">
+      <block wx:for="{{list}}" wx:key="index">
         <view class="pro-item">
-          <view class="item-check">
-            <checkbox value="{{item.checked}}" checked="{{item.checked}}"/>
-          </view>
+          <checkbox-group bindchange="changeSel" data-index="{{index}}" data-checked="{{item.checked}}">
+            <checkbox class="item-check" checked="{{item.checked}}"/>
+          </checkbox-group>
           <view class="item-img">
             <image src="{{item.img}}"></image>
           </view>
           <view class="item-info">
             <view class="item-title">{{item.goodsname}}</view>
-            <view class="item-title">{{item.remark}} 余量{{item.rest}}</view>
-            <view class="item-title">￥{{item.price}}</view>
-            <view class="item.count">
+            <view wx:if="{{item.remark}}" class="item-remark">{{item.remark}} 余量{{item.rest}}</view>
+            <view class="item-num">￥{{item.price}}</view>
+            <view class="item-count">
               <view class="count-box">
-                <view class="btn btn-left" bindtap="reduceNum">—</view>
+                <view class="btn btn-left" bindtap="reduceNum" data-index="{{index}}">-</view>
                 <input class="count-input" maxlength="10" type="number" value="{{item.count}}" />
-                <view class="btn btn-right" bindtap="addNum">+</view>
+                <view class="btn btn-right" bindtap="addNum" data-index="{{index}}">+</view>
               </view>
             </view>
+            <image class="item-del" src="../../images/delete.png" alt=""/>
           </view>
         </view>
       </block>
     </view>
-    <view class="page-btm"></view>
+    <view class="page-btm">
+      <view class="pb-left">
+        <checkbox-group bindchange="changeAllSel">
+          <checkbox bindchange="changeAllSel"></checkbox>
+        </checkbox-group>
+        全选
+      </view>
+      <view class="pb-right">
+        <view>合计：￥{{total}}</view>
+        <button class="pb-btn" bindtap="settlement">去结算</button>
+      </view>
+    </view>
   </view>
   <view wx:if="{{showEmpty}}">
     <image src="{{cartImg}}" class="cart-image"/>

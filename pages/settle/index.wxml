@@ -1,15 +1,45 @@
 <view class="container">
-    <block wx:for="{{brandList.brand}}">
-        <view class="brand_item">
-            <navigator url="../list/index?brand={{item.id}}&typeid={{item.typeid}}">
-                <image src="{{item.pic}}" class="pic"></image>
-                <view class="right_cont">
-                    <image src="{{item.logo}}" class="logo"></image>
-                    <text class="name">{{item.chinesename}}</text>
-                    <text class="brief">{{item.brief}}</text>
-                    <text class="price">￥{{item.minprice}}元/件起</text>
-                </view>
-            </navigator>
+  <view class="page-box" wx:if="{{!showEmpty}}">
+    <view class="pro-list">
+      <block wx:for="{{list}}" wx:key="index">
+        <view class="pro-item">
+          <view class="item-img">
+            <image src="{{item.img}}"></image>
+          </view>
+          <view class="item-info">
+            <view class="item-title">{{item.goodsname}}</view>
+            <view wx:if="{{item.remark}}" class="item-remark">{{item.remark}} 余量{{item.rest}}</view>
+            <view class="item-num">￥{{item.price}}</view>
+            <view class="item-count">
+              <view class="count-box">
+                <view class="btn btn-left" bindtap="reduceNum" data-index="{{index}}">-</view>
+                <input class="count-input" maxlength="10" type="number" value="{{item.count}}" />
+                <view class="btn btn-right" bindtap="addNum" data-index="{{index}}">+</view>
+              </view>
+            </view>
+          </view>
         </view>
-    </block>
+      </block>
+    </view>
+    <view class="pb-mid">
+      <radio-group class="radio-box" bindchange="radioChange">
+          <view class="weui-cell__hd">
+              <radio value="1" checked="true"/>
+              支付水桶押金
+          </view>
+          <view class="weui-cell__hd">
+              <radio value="2"/>
+              承诺归还协议
+          </view>
+      </radio-group>
+      <view class="pb-address" wx:if="{{selType == 2}}">
+        <view>家庭地址</view>
+        <textarea placeholder="请输入详细地址" auto-focus />
+      </view>
+      <view class="pb-btm">
+        实付款：￥{{total}}
+      </view>
+    </view>
+    <button class="confirm">确认</button>
+  </view>
 </view>

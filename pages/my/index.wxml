@@ -5,7 +5,7 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
   <view class="info_list">
-    <block wx:for="{{userListInfo}}">
+    <block wx:for="{{userListInfo}}" wx:key="unique">
         <view class="weui_cell">
             <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
             <view class="weui_cell_bd">

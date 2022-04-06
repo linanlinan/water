@@ -3,10 +3,125 @@
   height: 100%;
   align-items: center;/*垂直居中*/
   justify-content: center;/*水平居中*/
-  background-color: #F2f2f2;
+  background-color: #ffffff;
   color: #939393;
 }
-.container .cart-image {
-  width: 120px;
-  height: 120px;
+.page-box{
+  width: 100%;
+}
+.pro-item{
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.item-check{
+  transform: scale(0.7);
+}
+.item-img image{
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+.item-info{
+  height: 80px;
+  position: relative;
+  flex: 1;
+}
+.item-title{
+  font-size: 12px;
+  color: #000000;
+}
+.item-remark{
+  font-size: 12px;
+}
+.item-num{
+  font-size: 12px;
+  color: #666;
+}
+.count-box{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #ddd;
+}
+.count-box .count-input{
+  width: 30px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  text-align: center;
+  font-size: 12px;
+  height: 20px;
+}
+.count-box .btn{
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-del{
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  width: 16px;
+  height: 16px;
+}
+.page-btm{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 0 10px;
+  font-size: 12px;
+  border-top: 1px solid #ddd;
+  z-index: 10;
+}
+
+.pb-left{
+  display: flex;
+  align-items: center;
+}
+.pb-left checkbox{
+  transform: scale(0.7);
+}
+.pb-right{
+  display: flex;
+  align-items: center;
+}
+.pb-btn{
+  border-radius: 15px;
+  background: #ff0000;
+  font-size: 12px;
+  color: #fff;
+  margin-right: 20px;
+  height: 25px;
+  line-height: 25px;
+  margin-left: 10px;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #FF525C;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
 }

@@ -1,47 +1,53 @@
 {
-  "pages":[
-    "pages/cart/index",
-    "pages/index/index",
-    "pages/classify/index",
-    "pages/my/index",
-    "pages/details/index",
-    "pages/settle/index",
-    "pages/list/index"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "售水",
-    "navigationBarBackgroundColor": "#292929",
-    "backgroundColor": "#F2f2f2",
-    "enablePullDownRefresh": true
-  },
-  "tabBar": {
-    "color": "#2c2c2c",
-    "selectedColor": "#1296db",
-    "borderStyle": "white",
-    "backgroundColor": "#ffffff",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "iconPath": "images/tabBar/shouye.png",
-      "selectedIconPath": "images/tabBar/shouye_active.png",
-      "text": "首页"
-    }, {
-      "pagePath": "pages/classify/index",
-      "iconPath": "images/tabBar/fenlei.png",
-      "selectedIconPath": "images/tabBar/fenlei_active.png",
-      "text": "分类"
-    }, {
-      "pagePath": "pages/cart/index",
-      "iconPath": "images/tabBar/car.png",
-      "selectedIconPath": "images/tabBar/car_active.png",
-      "text": "购物车"
-    }, {
-      "pagePath": "pages/my/index",
-      "iconPath": "images/tabBar/wode.png",
-      "selectedIconPath": "images/tabBar/wode_active.png",
-      "text": "我的"
-    }]
-  },
-  "debug": true
+    "pages": [
+        "pages/my/index",
+        "pages/index/index",
+        "pages/classify/index",
+        "pages/cart/index",
+        "pages/details/index",
+        "pages/settle/index",
+        "pages/list/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "售水",
+        "navigationBarBackgroundColor": "#292929",
+        "backgroundColor": "#F2f2f2",
+        "enablePullDownRefresh": true
+    },
+    "tabBar": {
+        "color": "#2c2c2c",
+        "selectedColor": "#1296db",
+        "borderStyle": "white",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "images/tabBar/shouye.png",
+                "selectedIconPath": "images/tabBar/shouye_active.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/classify/index",
+                "iconPath": "images/tabBar/fenlei.png",
+                "selectedIconPath": "images/tabBar/fenlei_active.png",
+                "text": "分类"
+            },
+            {
+                "pagePath": "pages/cart/index",
+                "iconPath": "images/tabBar/car.png",
+                "selectedIconPath": "images/tabBar/car_active.png",
+                "text": "购物车"
+            },
+            {
+                "pagePath": "pages/my/index",
+                "iconPath": "images/tabBar/wode.png",
+                "selectedIconPath": "images/tabBar/wode_active.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "debug": true,
+    "sitemapLocation": "sitemap.json"
 }
