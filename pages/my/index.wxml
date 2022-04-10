@@ -6,7 +6,7 @@
   </view>
   <view class="info_list">
     <block wx:for="{{userListInfo}}" wx:key="unique">
-        <view class="weui_cell">
+        <view class="weui_cell" bindtap="goRouter" data-route="{{item.router}}" data-index="{{index}}">
             <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
             <view class="weui_cell_bd">
                 <view class="weui_cell_bd_p"> {{item.text}} </view>
@@ -15,5 +15,17 @@
             <view class="with_arrow"></view>
         </view>
     </block>
+  </view>
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="md-title">投诉建议</view>
+      <textarea class="md-text">
+      
+      </textarea>
+      <view class="md-btn">
+        <button bindtap="cancel">取消</button>
+        <button class="md-confirm" bindtap="confirm">确定</button>
+      </view>
+    </view>
   </view>
 </view>

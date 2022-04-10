@@ -21,7 +21,6 @@ Page({
                 'Accept': 'application/json'
             },
             success: function(res) {
-                //console.log(res.data.data);
                 that.data.shopppingDetails = res.data.data;
 
                 var goodsPicsInfo = [];

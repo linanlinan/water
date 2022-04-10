@@ -37,6 +37,11 @@
 }
 .item-remark{
   font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.item-remark view{
+  margin-right: 10px;
 }
 .item-num{
   font-size: 12px;

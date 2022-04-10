@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="info_list" wx:for="{{list}}" wx:key="unique">
+    <view class="il-l">
+      <view class="il-l-t">￥{{item.paymoney}}</view>
+      <view class="il-l-m">关联订单号：{{item.ordersn}}</view>
+      <view class="il-l-b" wx:if="{{item.status == 9}}">退款时间：{{item.modifiedtime}}</view>
+    </view>
+    <view class="il-r" wx:if="{{item.status == 8}}">待退款</view>
+    <view class="il-r" wx:if="{{item.status == 9}}">已退款</view>
+  </view>
+</view>

@@ -8,12 +8,19 @@
           </view>
           <view class="item-info">
             <view class="item-title">{{item.goodsname}}</view>
-            <view wx:if="{{item.remark}}" class="item-remark">{{item.remark}} 余量{{item.rest}}</view>
+            <view class="item-remark">
+              <view wx:if="{{item.remark}}">
+                {{item.remark}}
+              </view>
+              <view wx:if="{{item.stock}}">
+                余量{{item.stock}}
+              </view>
+            </view>
             <view class="item-num">￥{{item.price}}</view>
             <view class="item-count">
               <view class="count-box">
                 <view class="btn btn-left" bindtap="reduceNum" data-index="{{index}}">-</view>
-                <input class="count-input" maxlength="10" type="number" value="{{item.count}}" />
+                <input class="count-input" maxlength="10" type="number" value="{{item.salecount}}" />
                 <view class="btn btn-right" bindtap="addNum" data-index="{{index}}">+</view>
               </view>
             </view>
@@ -39,7 +46,10 @@
       <view class="pb-btm">
         实付款：￥{{total}}
       </view>
+      <view class="pb-text">
+        <textarea	value="{{address}}" bindinput="addressInput" placeholder="请输入收货地址" name="" id="" cols="30" rows="10" confirm-type="done"></textarea>
+      </view>
     </view>
-    <button class="confirm">确认</button>
+    <button class="confirm" bindtap="confirm">确认</button>
   </view>
 </view>

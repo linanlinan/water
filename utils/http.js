@@ -27,23 +27,13 @@ function request(url, data = {}, method = "GET") {
         // 'Authorization': 'Bearer ' + getDataByKey('token')
       },
       success: function(res) {
-        console.log('===============================================================================================')
-        console.log('==    接口地址：' + url)
-        console.log('==    接口参数：' + JSON.stringify(data))
-        console.log('==    请求类型：' + method)
-        console.log("==    接口状态：" + res.statusCode);
-        console.log('===============================================================================================')
         if (res.statusCode == 200) {
           //请求正常200
           //AES解密返回的数据
           var daesData = null
           try {
-            //此处结合了上篇文章的AES解密，如果不需要加解密，可以自行去掉，直接使用数据 res.data。
-            // daesData = aes.getDAes(res.data)
-            // console.log('解密后的数据：' + daesData)
-            // daesData = JSON.parse(daesData)
-            daesData = res
-            if (daesData.status) {
+            daesData = res.data
+            if (daesData.code == 0) {
               //正常
               resolve(daesData.data);
             } else {
@@ -63,12 +53,10 @@ function request(url, data = {}, method = "GET") {
             content: '登录已过期，请立即登录，否则无法正常使用',
             success(res) {
               if (res.confirm) {
-                console.log('用户点击确定')
                 wx.navigateTo({
                   url: '/pages/login/login?toPageUrl=401',
                 })
               } else if (res.cancel) {
-                console.log('用户点击取消')
               }
             }
           })
@@ -78,13 +66,6 @@ function request(url, data = {}, method = "GET") {
         }
       },
       fail: function(err) {
-        //服务器连接异常
-        console.log('===============================================================================================')
-        console.log('==    接口地址：' + url)
-        console.log('==    接口参数：' + JSON.stringify(data))
-        console.log('==    请求类型：' + method)
-        console.log("==    服务器连接异常")
-        console.log('===============================================================================================')
         reject("服务器连接异常，请检查网络再试")
       }
     })

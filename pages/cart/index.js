@@ -1,4 +1,6 @@
 var app = getApp()
+var api = require('../../config/api.js')
+var http = require('../../utils/http.js')
 Page({
   data: {
     cartImg: '../../images/cart-null.png',
@@ -15,39 +17,53 @@ Page({
   },
 
   getList() {
-    this.setData({
-      list: [
-        {"id":1,"goodsname":"小浣熊","price":3,"stock":35,"pricein":0,"id_brand":35,"brand":"零食",rest: 4,checked: false,count:1,remark:"含水桶",img: "https://hbimg.huabanimg.com/fd2697308ec81249de76210b731314fd288f3df03e159-ZwOBLq_/fw/480/format/webp"},
-        {"id":2,"goodsname":"小浣熊","price":3,"stock":35,"pricein":0,"id_brand":35,"brand":"零食",rest: 4,checked: false,count:1,remark:"含水桶",img: "https://hbimg.huabanimg.com/fd2697308ec81249de76210b731314fd288f3df03e159-ZwOBLq_/fw/480/format/webp"},
-        {"id":2,"goodsname":"小浣熊","price":3,"stock":35,"pricein":0,"id_brand":35,"brand":"零食",rest: 4,checked: false,count:1,remark:"含水桶",img: "https://hbimg.huabanimg.com/fd2697308ec81249de76210b731314fd288f3df03e159-ZwOBLq_/fw/480/format/webp"},
-        {"id":2,"goodsname":"小浣熊","price":3,"stock":35,"pricein":0,"id_brand":35,"brand":"零食",rest: 4,checked: false,count:1,remark:"含水桶",img: "https://hbimg.huabanimg.com/fd2697308ec81249de76210b731314fd288f3df03e159-ZwOBLq_/fw/480/format/webp"},
-        {"id":2,"goodsname":"小浣熊","price":3,"stock":35,"pricein":0,"id_brand":35,"brand":"零食",rest: 4,checked: false,count:1,remark:"含水桶",img: "https://hbimg.huabanimg.com/fd2697308ec81249de76210b731314fd288f3df03e159-ZwOBLq_/fw/480/format/webp"}
-      ]
+    http.get(api.carList, {
+      openid: app.globalData.openId,
+      limit: 1000,
+      page: 1
+    }).then(res => {
+        let data = res.data || []
+        for (const item of data) {
+          item.checked = false
+          item.salecount = 1
+        }
+        this.setData({
+            list: data
+        })
     })
   },
 
   reduceNum(e) {
     let index = e.target.dataset.index
-    let count = `list[${index}].count`
+    let salecount = `list[${index}].salecount`
     this.setData({
-      [count]: Math.max(this.data.list[index].count - 1, 0)
+      [salecount]: Math.max(this.data.list[index].salecount - 1, 0)
     })
     this.calculat()
   },
 
   addNum(e) {
     let index = e.target.dataset.index
-    let count = `list[${index}].count`
+    let salecount = `list[${index}].salecount`
     this.setData({
-      [count]: this.data.list[index].count + 1
+      [salecount]: this.data.list[index].salecount + 1
     })
     this.calculat()
   },
   // 去结算页
   settlement() {
-    wx.navigateTo({
-      url: '/pages/settle/index'
-    })
+    if (this.data.total > 0) {
+      app.globalData.carList = this.data.list
+      wx.navigateTo({
+        url: '/pages/settle/index'
+      })
+    } else {
+      wx.showToast({
+        title: '请选择商品',
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
 
   changeAllSel(e) {
@@ -74,15 +90,30 @@ Page({
 
   // 计算金额
   calculat() {
-    let count = 0
+    let salecount = 0
     for (const item of this.data.list) {
       if(item.checked) {
-        let itemCount = item.price * item.count
-        count = count + (itemCount || 0)
+        let itemsalecount = item.price * item.salecount
+        salecount = salecount + (itemsalecount || 0)
       }
     }
     this.setData({
-      total: count
+      total: salecount
+    })
+  },
+
+  delCar(e) {
+    let index = e.target.dataset.index
+    let carItem = this.data.list[index]
+    http.get(api.delCarItem, {
+      id: carItem.id,
+      ds: 1
+    }).then(res => {
+      this.getList()
+      let list = this.data.list.splice(index, 1)
+      this.setData({
+        lsit: list
+      })
     })
   }
 })

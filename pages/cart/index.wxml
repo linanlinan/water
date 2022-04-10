@@ -11,16 +11,23 @@
           </view>
           <view class="item-info">
             <view class="item-title">{{item.goodsname}}</view>
-            <view wx:if="{{item.remark}}" class="item-remark">{{item.remark}} 余量{{item.rest}}</view>
+            <view class="item-remark">
+              <view wx:if="{{item.remark}}">
+                {{item.remark}}
+              </view>
+              <view wx:if="{{item.stock}}">
+                余量{{item.stock}}
+              </view>
+            </view>
             <view class="item-num">￥{{item.price}}</view>
             <view class="item-count">
               <view class="count-box">
                 <view class="btn btn-left" bindtap="reduceNum" data-index="{{index}}">-</view>
-                <input class="count-input" maxlength="10" type="number" value="{{item.count}}" />
+                <input class="count-input" maxlength="10" type="number" value="{{item.salecount}}" />
                 <view class="btn btn-right" bindtap="addNum" data-index="{{index}}">+</view>
               </view>
             </view>
-            <image class="item-del" src="../../images/delete.png" alt=""/>
+            <image class="item-del" bindtap="delCar" data-index="{{index}}" src="../../images/delete.png" alt=""/>
           </view>
         </view>
       </block>

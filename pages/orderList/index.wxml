@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="info_list" wx:for="{{list}}" wx:key="unique">
+    <view class="item-top">
+      <view class="it-l">订单编号:{{item.ordersn}}</view>
+      <view class="it-r">{{item.orderTime}}</view>
+    </view>
+    <view class="item-mid">
+      <view class="im-l">
+        <image src="{{item.img}}" alt=""/>
+      </view>
+      <view class="im-m">
+        <view class="item-title">{{item.goodsname}}</view>
+        <view class="item-com" wx:if="{{item.remark}}">{{item.remark}}</view>
+      </view>
+      <view class="im-r">
+        <view class="item-price">￥{{item.paymoney / item.num}}</view>
+        <view class="item-com">x {{item.num}}</view>
+      </view>
+    </view>
+    <view class="item-btm">
+      实付金额：￥{{item.paymoney}}
+    </view>
+  </view>
+</view>

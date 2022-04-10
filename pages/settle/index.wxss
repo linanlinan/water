@@ -35,6 +35,11 @@
 }
 .item-remark{
   font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.item-remark view{
+  margin-right: 10px;
 }
 .item-num{
   font-size: 12px;
@@ -136,4 +141,16 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .pb-btm{
   padding: 10px;
   text-align: right;
+}
+
+.pb-text{
+  padding: 10px 20px 0;
+  border-top: 1px solid #ddd;
+}
+.pb-text textarea{
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
 }

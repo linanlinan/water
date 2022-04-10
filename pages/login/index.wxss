@@ -1,0 +1,38 @@
+/* components/test/index.wxss */
+.wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-wrapper {
+  position: relative;
+  width: 80%;
+  padding: 40rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+.login-wrapper .close-icon {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+.login-wrapper .title {
+  font-size: 34rpx;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40rpx;
+}
+.auth-button {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: block;
+  margin-bottom: 30rpx;
+}

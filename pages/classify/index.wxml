@@ -1,12 +1,12 @@
 <view class="container">
   <view class="nav_left">
-    <block wx:for="{{navLeftItems}}">
-      <view class="nav_left_items {{curNav == item.id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.id}}">{{item.label}}</view>
+    <block wx:for="{{navLeftItems}}" wx:key="unique">
+      <view class="nav_left_items {{curNav == item.id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.classname}}">{{item.classname}}</view>
     </block>
   </view>
   <view class="nav_right">
     <view wx:if="{{navRightItems.length > 0}}">
-      <block wx:for="{{navRightItems}}">
+      <block wx:for="{{navRightItems}}" wx:key="unique">
         <view class="choice_item">
             <image src="{{item.img}}"/>
             <view class="info-box">

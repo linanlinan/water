@@ -1,0 +1,56 @@
+/**index.wxss**/
+.container {
+  background-color: #F2f2f2;
+}
+.info_list{
+  padding: 10px;
+  font-size: 12px;
+  color: #888;
+  background: #fff;
+  margin-bottom: 10px;
+}
+.item-top{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.item-top view{
+  transform: scale(0.8);
+}
+.item-top .it-l{
+  transform-origin: left;
+}
+.item-top .it-r{
+  transform-origin: right;
+}
+.item-mid{
+  display: flex;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+.im-l image{
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+}
+
+.im-m{
+  flex: 3;
+}
+.im-r{
+  text-align: right;
+}
+.item-title{
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.item-price{
+  color: #333;
+  margin-bottom: 6px;
+}
+.item-btm{
+  padding-top: 10px;
+  text-align: right;
+}

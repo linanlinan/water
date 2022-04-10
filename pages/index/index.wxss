@@ -4,12 +4,14 @@
 
 .swiper_box {
     width: 100%;
+    height: 200px;
 }
 
 swiper-item image {
     width: 100%;
     display: inline-block;
     overflow: hidden;
+    object-fit: contain;
 }
 
 view.text {
@@ -76,7 +78,7 @@ view.text text {
 .choice_item image {
     width: 100%;
     height: 150px;
-    object-fit: contain;
+    object-fit: cover;
 }
 .info-box{
     display: flex;
