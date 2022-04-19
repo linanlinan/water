@@ -22,15 +22,15 @@
         "uploadWithSourceMap": true,
         "compileHotReLoad": false,
         "lazyloadPlaceholderEnable": false,
-        "useMultiFrameRuntime": true,
-        "useApiHook": true,
-        "useApiHostProcess": true,
+        "useMultiFrameRuntime": false,
+        "useApiHook": false,
+        "useApiHostProcess": false,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
         },
-        "useIsolateContext": true,
+        "useIsolateContext": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
@@ -43,7 +43,7 @@
     },
     "compileType": "miniprogram",
     "libVersion": "2.17.0",
-    "appid": "wx41fff34f6a34fce3",
+    "appid": "wx30fe0e549e6580ce",
     "projectname": "%E5%94%AE%E6%B0%B4",
     "debugOptions": {
         "hidedInDevtools": []

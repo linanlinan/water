@@ -16,6 +16,12 @@ function post(url, data = {}) {
  * 微信的request
  */
 function request(url, data = {}, method = "GET") {
+  let userInfo = wx.getStorageSync('userInfo')
+  if (data.needLog && !userInfo) {
+    return wx.navigateTo({
+      url: '/pages/login/index',
+    })
+  }
   var contentType = 'application/json'
   return new Promise(function(resolve, reject) {
     wx.request({
@@ -33,12 +39,12 @@ function request(url, data = {}, method = "GET") {
           var daesData = null
           try {
             daesData = res.data
-            if (daesData.code == 0) {
+            if (daesData.code == 0 || (daesData.code == 200)) {
               //正常
               resolve(daesData.data);
             } else {
               //错误
-              reject(daesData.message)
+              reject(daesData)
             }
           } catch (error) {
             console.log('==    数据解码失败')
@@ -62,7 +68,7 @@ function request(url, data = {}, method = "GET") {
           })
         } else {
           //请求失败
-          reject("请求失败：" + res.statusCode)
+          reject(res)
         }
       },
       fail: function(err) {

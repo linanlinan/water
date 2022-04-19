@@ -13,10 +13,15 @@ Page({
             page: 1,
             limit: 200
         }).then(res => {
-            this.setData({
-                navLeftItems: res.data,
-                curNav: res.data[0].id
-            })
+            if (res.data.length > 0) {
+                let first = res.data[0]
+                this.setData({
+                    navLeftItems: res.data,
+                    curNav: first.id
+                })
+                this.getRightData(first.classname)
+            }
+            
         })
     },
 
@@ -46,15 +51,18 @@ Page({
         var id = event.currentTarget.dataset.id
 
         http.get(api.addCar, {
-            openid: app.globalData.openid,
-            commodityId: id
+            openid: app.globalData.openId,
+            idUser: app.globalData.userId,
+            commodityId: id,
+            needLog: true
         }).then(res => {
             wx.showToast({
                 title: "添加成功"
             })
         }).catch(res => {
             wx.showToast({
-                title: "添加失败"
+                icon: 'none',
+                title: res.msg
             })
         })
     }

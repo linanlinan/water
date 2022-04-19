@@ -1,10 +1,9 @@
-<view class='wrapper' hidden="{{!unLogin}}">
-  <view class='login-wrapper'>
-    <icon class="close-icon" wx:if="{{showClose}}" bindtap="close" type="cancel" color="#B2B2B2"></icon>
-    <view class="title">登录或注册</view>
-    <button class="auth-button"
-            type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">微信帐号快速登录</button>
-    <!--<button open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="onGotPhoneNumber">手机号登录/注册</button>-->
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    </block>
   </view>
 </view>
 

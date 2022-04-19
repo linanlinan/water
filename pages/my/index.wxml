@@ -19,11 +19,11 @@
   <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
     <view class="modal-dialog" wx:if="{{showModal}}">
       <view class="md-title">投诉建议</view>
-      <textarea class="md-text">
+      <textarea class="md-text" bindinput="bindinputFB">
       
       </textarea>
       <view class="md-btn">
-        <button bindtap="cancel">取消</button>
+        <button bindtap="cancel" bindtap="cancel">取消</button>
         <button class="md-confirm" bindtap="confirm">确定</button>
       </view>
     </view>

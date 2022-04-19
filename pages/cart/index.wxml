@@ -23,7 +23,7 @@
             <view class="item-count">
               <view class="count-box">
                 <view class="btn btn-left" bindtap="reduceNum" data-index="{{index}}">-</view>
-                <input class="count-input" maxlength="10" type="number" value="{{item.salecount}}" />
+                <input class="count-input" maxlength="10" type="number" value="{{item.salecount}}" bindinput="bindKeyInput" data-index="{{index}}" />
                 <view class="btn btn-right" bindtap="addNum" data-index="{{index}}">+</view>
               </view>
             </view>
@@ -35,7 +35,7 @@
     <view class="page-btm">
       <view class="pb-left">
         <checkbox-group bindchange="changeAllSel">
-          <checkbox bindchange="changeAllSel"></checkbox>
+          <checkbox checked="{{allSel}}" bindchange="changeAllSel"></checkbox>
         </checkbox-group>
         全选
       </view>

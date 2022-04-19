@@ -11,7 +11,8 @@ Page( {
       recuser: app.globalData.userId,
       isYj: '0',
       limit: 1000,
-      page: 1
+      page: 1,
+      needLog: true
     }).then(res => {
       let data = res.data || []
       for (const item of data) {

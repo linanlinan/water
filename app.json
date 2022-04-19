@@ -4,10 +4,9 @@
         "pages/classify/index",
         "pages/cart/index",
         "pages/my/index",
-        "pages/details/index",
+        "pages/list/index",
         "pages/settle/index",
         "pages/login/index",
-        "pages/list/index",
         "pages/refundList/index",
         "pages/orderList/index"
     ],

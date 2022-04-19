@@ -1,4 +1,6 @@
 var app = getApp()
+var api = require('../../config/api.js')
+var http = require('../../utils/http.js')
 Page( {
   data: {
     userInfo: {},
@@ -16,18 +18,22 @@ Page( {
         text: '投诉建议'
       }
     ],
-    showModal:false
+    showModal:false,
+    feedbackText: ''
   },
 
   onLoad: function() {
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo( function( userInfo ) {
-      //更新数据
-      that.setData( {
-        userInfo: userInfo
+  },
+  onShow() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo
       })
-    })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/index',
+      })
+    }
   },
 
   goRouter(e){
@@ -51,9 +57,40 @@ Page( {
       showModal: false
     })
   },
+  bindinputFB(e) {
+    this.setData({
+      feedbackText: e.detail.value
+    })
+  },
   confirm() {
+    if (!this.data.feedbackText) {
+      return wx.showToast({
+        icon: 'none',
+        title: '投诉建议不能为空'
+      })
+    }
+    http.get(api.feedback, {
+      id_user: app.globalData.userId,
+      id_store: app.globalData.storeId || '',
+      content: this.data.feedbackText,
+      nickname: app.globalData.userInfo.nickName,
+    }).then(res => {
+      wx.showToast({
+        icon: 'success',
+        title: '提交成功'
+      })
+      this.clearFeedbackText()
+    })
+  },
+  cancel() {
+    this.clearFeedbackText()
+  },
+  clearFeedbackText() {
+    this.setData({
+      feedbackText: ''
+    })
     this.setData({
       showModal: false
     })
-  },
+  }
 })

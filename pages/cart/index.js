@@ -10,17 +10,24 @@ Page({
     allSel: false, // 全选
     total: 0, //金额合计
   },
-
   onLoad: function() {
-    var that = this
     this.getList()
+  },
+
+  onShow() {
+    this.getList()
+    this.setData({
+      allSel: false,
+      total: 0
+    })
   },
 
   getList() {
     http.get(api.carList, {
       openid: app.globalData.openId,
       limit: 1000,
-      page: 1
+      page: 1,
+      needLog: true
     }).then(res => {
         let data = res.data || []
         for (const item of data) {
@@ -36,24 +43,36 @@ Page({
   reduceNum(e) {
     let index = e.target.dataset.index
     let salecount = `list[${index}].salecount`
-    this.setData({
-      [salecount]: Math.max(this.data.list[index].salecount - 1, 0)
-    })
-    this.calculat()
+    this.setSaleCount(Math.max(this.data.list[index].salecount - 1, 0), index)
   },
 
   addNum(e) {
     let index = e.target.dataset.index
+    this.setSaleCount(this.data.list[index].salecount + 1, index)
+  },
+  bindKeyInput(e) {
+    let value = Number(e.detail.value) || 0
+    let index = e.target.dataset.index
+    this.setSaleCount(value, index)
+  },
+  setSaleCount(count, index) {
     let salecount = `list[${index}].salecount`
-    this.setData({
-      [salecount]: this.data.list[index].salecount + 1
-    })
+    let item = this.data.list[index]
+    if (item.stock) {
+      this.setData({
+        [salecount]: Math.min(count, item.stock)
+      })
+    } else {
+      this.setData({
+        [salecount]: count
+      })
+    }
     this.calculat()
   },
   // 去结算页
   settlement() {
     if (this.data.total > 0) {
-      app.globalData.carList = this.data.list
+      app.globalData.carList = this.data.list.filter(el => el.checked)
       wx.navigateTo({
         url: '/pages/settle/index'
       })
@@ -98,22 +117,34 @@ Page({
       }
     }
     this.setData({
-      total: salecount
+      total: Number(salecount.toFixed(2))
     })
   },
 
   delCar(e) {
     let index = e.target.dataset.index
     let carItem = this.data.list[index]
-    http.get(api.delCarItem, {
-      id: carItem.id,
-      ds: 1
-    }).then(res => {
-      this.getList()
-      let list = this.data.list.splice(index, 1)
-      this.setData({
-        lsit: list
-      })
+    let that = this
+    wx.showModal({
+      content: '您是否要删除该商品?',
+      success (res) {
+        if (res.confirm) {
+          http.get(api.delCarItem, {
+            id: carItem.id,
+            ds: 1,
+            needLog: true
+          }).then(res => {
+            that.getList()
+            let list = that.data.list.splice(index, 1)
+            that.setData({
+              lsit: list
+            })
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
+    
   }
 })

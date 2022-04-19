@@ -1,57 +1,35 @@
+var app = getApp()
 
-const app = getApp()
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-    showClose: {
-      type: Boolean,
-      value: false
-    }
-  },
-
-  /**
-   * 组件的初始数据
-   */
+Page({
   data: {
-    unLogin: true
+    userInfo: {},
+    hasUserInfo: false,
+    canIUseGetUserProfile: false,
   },
-
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-    showLogin () {
+  onLoad() {
+    if (wx.getUserProfile) {
       this.setData({
-        unLogin: true
+        canIUseGetUserProfile: true
       })
-    },
-    hideLogin() {
-      this.setData({
-        unLogin: false
-      })
-    },
-    close() {
-      if (!this.data.showClose) {
-        return
-      }
-      this.setData({
-        unLogin: false
-      });
-      this.triggerEvent('close')
-    },
-    setUserInfo(userInfo) {
-      this.triggerEvent('authSuccess', userInfo)
-    },
-    onGotUserInfo(e) {
-      console.log(e);
-      if (e.detail.userInfo) {
-        this.hideLogin();
-      }
-    },
-    onGotPhoneNumber (e) {
-      console.log('getPhoneNumber====', e)
     }
+  },
+  getUserProfile(e) {
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        this.setGloabUserInfo(res.userInfo)
+      }
+    })
+  },
+  getUserInfo(e) {
+    this.setGloabUserInfo(e.detail.userInfo)
+  },
+  setGloabUserInfo(data) {
+    wx.setStorage({
+      key: 'userInfo',
+      data: data
+    })
+    app.globalData.userInfo = data
+    wx.navigateBack()
   }
 })

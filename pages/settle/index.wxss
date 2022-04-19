@@ -8,7 +8,7 @@
 }
 .page-box{
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 .pro-item{
   padding: 10px 30px;
@@ -83,7 +83,10 @@
 .weui-cell__hd{
   margin-right: 10px;
 }
-
+.weui-cell__hd view{
+  display: inline;
+  color: blue;
+}
 radio .wx-radio-input {
   height: 40rpx;
   width: 40rpx;
@@ -127,13 +130,13 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .confirm{
   position: fixed;
   width: 80%;
-  height: 30px;
+  height: 40px;
   background: red;
   color: #fff;
   left: 50%;
-  bottom: 10px;
+  bottom: 20px;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   border-radius: 20px;
 }
@@ -153,4 +156,50 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   height: 80px;
   padding: 10px;
   box-sizing: border-box;
+}
+/* 弹窗 */
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 9000;
+  opacity: 0.7;
+  }
+.modalDlg{
+  width: 80%;
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 36rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.useralert_quanyi{
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.dialog-info{
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 12px;
+}
+.dia-btn-box{
+  margin-top: 10px;
+  text-align: center;
+}
+.dia-btn-box button{
+  width:100px;
+  height: 30px;
+  background: red;
+  color: #fff;
+  line-height: 30px;
+  font-size: 12px;
 }

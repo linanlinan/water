@@ -20,7 +20,7 @@
             <view class="item-count">
               <view class="count-box">
                 <view class="btn btn-left" bindtap="reduceNum" data-index="{{index}}">-</view>
-                <input class="count-input" maxlength="10" type="number" value="{{item.salecount}}" />
+                <input class="count-input" maxlength="10" type="number" value="{{item.salecount}}" bindinput="bindKeyInput" data-index="{{index}}" />
                 <view class="btn btn-right" bindtap="addNum" data-index="{{index}}">+</view>
               </view>
             </view>
@@ -36,20 +36,34 @@
           </view>
           <view class="weui-cell__hd">
               <radio value="2"/>
-              承诺归还协议
+              <view bindtap="showAgreement">
+                桶承诺条款
+              </view>
+              
           </view>
       </radio-group>
       <view class="pb-address" wx:if="{{selType == 2}}">
         <view>家庭地址</view>
-        <textarea placeholder="请输入详细地址" auto-focus />
+        <textarea	value="{{address}}" bindinput="addressInput" placeholder="请输入收货地址" name="" id="" cols="30" rows="10" confirm-type="done"></textarea>
       </view>
       <view class="pb-btm">
-        实付款：￥{{total}}
-      </view>
-      <view class="pb-text">
-        <textarea	value="{{address}}" bindinput="addressInput" placeholder="请输入收货地址" name="" id="" cols="30" rows="10" confirm-type="done"></textarea>
+        实付款：￥{{showMoney}}
       </view>
     </view>
     <button class="confirm" bindtap="confirm">确认</button>
+  </view>
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <view class='useralert_quanyi'>桶承诺条款</view>
+    <view class='dialog-info'>
+      <view>在本平台小程序或经销商渠道购买桶装水的客户(以下简称客户)，客户在本平台小程序操作中选择本“桶承诺条款“时，默认为认真阅读并同意遵守本条款约定的相关内容，并承诺同意按以下条款执行。</view>
+      <view>1、客户选择不交平台或经销商桶押金时，客户自动进入承诺条款页面，平台会保存客户未交桶押金的信息记录，客户认可平台相关信息真实有效。</view>
+      <view>2、客户选择不交平台或经销商桶装水的空桶押金时，客户承诺归还平台或经销商所领的空桶，如客户未能按平台或经销商要求归还，客户同意平台或经销商有权向客户索要或扣除空桶费用30元/个。</view>
+      <view>3、客户如所归还不是平台或经销商的空桶，或桶有明显划痕、破损或人为损坏，客户同意平台或经销商有权向客户索要或扣除空桶费用30元/个。</view>
+      <view>4、如客户拒交或拒扣桶押金，平台有向当地人民法院起诉客户和追究赔偿的权利，有关诉讼费和律师费等均由客户承担。</view>
+    </view>
+    <view class='dia-btn-box'>
+      <button bindtap="closeDia">确定</button>
+    </view>
   </view>
 </view>

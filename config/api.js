@@ -1,5 +1,5 @@
 //测试地址
-const ApiRootUrl = 'http://123.57.66.216:8080'
+const ApiRootUrl = 'https://water.jiayue.online'
 
 module.exports = {
   login: ApiRootUrl + '/water/WxPay/getOpenIdAndKey',
@@ -34,4 +34,10 @@ module.exports = {
 
   // 支付
   payUrl: ApiRootUrl + '/water/WxPay/wxPayOrder',
+
+  // 获取押金
+  getYj: ApiRootUrl + '/water/material/querypage',
+
+  // 反馈建议
+  feedback: ApiRootUrl + '/water/feedback/add',
 }

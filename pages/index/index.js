@@ -18,14 +18,11 @@ Page({
     },
 
     onLoad: function(query) {
-        const q = decodeURIComponent(query.q) // 获取到二维码原始链接内容
-        app.globalData.urlParam = q
-
-        var that = this
-        
+        const q = decodeURIComponent(query.id) // 获取到二维码原始链接内容
+        app.globalData.storeId = q
         this.getBanner()
         this.getChoices()
-        
+        setInterval(this.getChoices, 10000)
     },
 
     getBanner() {
@@ -51,17 +48,19 @@ Page({
 
     addCar(event) {
         var id = event.currentTarget.dataset.id
-
         http.get(api.addCar, {
-            openid: app.globalData.openid,
-            commodityId: id
+            openid: app.globalData.openId,
+            idUser: app.globalData.userId,
+            commodityId: id,
+            needLog: true
         }).then(res => {
             wx.showToast({
                 title: "添加成功"
             })
         }).catch(res => {
             wx.showToast({
-                title: "添加失败"
+                icon: 'none',
+                title: res.msg
             })
         })
     }
