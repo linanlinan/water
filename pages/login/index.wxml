@@ -4,6 +4,10 @@
       <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
       <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     </block>
+    <view class="btn-box">
+      <input class="phone" type="number" name="" id="" bindinput="numberHandle" placeholder="请输入手机号码。。。"/>
+      <button bindtap="submit">提交</button>
+    </view>
   </view>
 </view>
 

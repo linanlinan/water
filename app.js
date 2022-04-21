@@ -2,7 +2,10 @@
 var api = require('/config/api.js')
 var http = require('/utils/http.js')
 App({
-  onLaunch: function () {
+  onLaunch: function (query) {
+    const q = decodeURIComponent(query.query.id) // 获取到二维码原始链接内容
+    console.log(q);
+    this.globalData.storeId = q
     this.globalData.userInfo = wx.getStorageSync('userInfo')
     this.login()
   },
@@ -15,7 +18,8 @@ App({
         }).then(res => {
           that.globalData.openId = res.openId
           http.get(api.addUser, {
-            openId: res.openId
+            openId: res.openId,
+            tenantId: that.globalData.storeId
           }).then(res => {
             that.globalData.userId = res.id_user
           })
@@ -44,6 +48,7 @@ App({
     openId: 'openid1',
     userId: null,
     storeId: null,
-    carList: []
+    carList: [],
+    phone: null
   }
 })
