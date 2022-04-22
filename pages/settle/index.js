@@ -137,9 +137,9 @@ Page({
         ...item,
         recaddress: this.data.address,
         recuser: app.globalData.userId,
-        adId: item.id,
-        isHaveYJ: this.data.selType == 1 ? '0' : '1',
-        needLog: true
+        adId: item.goodId,
+        isHaveYJ: this.data.selType == 1 ? '1' : '0',
+        recphone: app.globalData.phone
       })
     }
     let total = this.data.selType == 1 ? (this.data.total + this.data.yjTotal) * 100 : this.data.total * 100
@@ -149,6 +149,7 @@ Page({
       orders: newList,
       needLog: true
     }).then(res => {
+      console.log(res);
       wx.requestPayment({
         provider: 'wxpay',
         nonceStr: res.nonceStr,
@@ -156,12 +157,20 @@ Page({
         signType: res.signType,
         paySign: res.paySign,
         timeStamp: res.timeStamp,
-        success: function(res) {
+        success: function() {
+          http.get(api.updateOrder, {
+            id: res.yjOrderId,
+            status: '1'
+          })
           wx.navigateTo({
             url: "index"
           })
         },
         fail: function(err) {
+          http.get(api.updateOrder, {
+            id: res.yjOrderId,
+            status: '7'
+          })
           wx.showToast({
             title: "支付失败",
             icon: 'none'

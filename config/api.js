@@ -40,4 +40,7 @@ module.exports = {
 
   // 反馈建议
   feedback: ApiRootUrl + '/water/feedback/add',
+
+  // 修改订单状态
+  updateOrder: ApiRootUrl + '/water/order/update',
 }

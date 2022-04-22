@@ -18,9 +18,10 @@ function post(url, data = {}) {
 function request(url, data = {}, method = "GET") {
   let userInfo = wx.getStorageSync('userInfo')
   if (data.needLog && !userInfo) {
-    return wx.navigateTo({
+    wx.navigateTo({
       url: '/pages/login/index',
     })
+    return Promise.reject()
   }
   var contentType = 'application/json'
   return new Promise(function(resolve, reject) {

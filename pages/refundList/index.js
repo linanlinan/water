@@ -9,15 +9,14 @@ Page( {
   onLoad: function() {
     http.get(api.getOrderList, {
       recuser: app.globalData.userId,
-      isYj: '0',
+      isYj: '1',
       limit: 1000,
       page: 1,
       needLog: true
     }).then(res => {
       let data = res.data || []
       for (const item of data) {
-        let time =  new Date(item.createdtime.time).toISOString().replace('T', ' ')
-        item.orderTime = time.split('.')[0]
+        item.orderTime = item.createdtimeStr
       }
       this.setData({
           list: res.data || []

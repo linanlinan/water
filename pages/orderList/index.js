@@ -16,8 +16,7 @@ Page( {
     }).then(res => {
       let data = res.data || []
       for (const item of data) {
-        let time =  new Date(item.createdtime.time).toISOString().replace('T', ' ')
-        item.orderTime = time.split('.')[0]
+        item.orderTime = item.createdtimeStr
       }
       this.setData({
           list: res.data || []
