@@ -1,5 +1,5 @@
 //测试地址
-const ApiRootUrl = 'https://water.jiayue.online'
+const ApiRootUrl = 'https://www.jiayue.online'
 
 module.exports = {
   login: ApiRootUrl + '/water/WxPay/getOpenIdAndKey',
