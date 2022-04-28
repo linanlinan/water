@@ -19,7 +19,10 @@ Page({
 
     onLoad: function(query) {
         const q = decodeURIComponent(query.id) // 获取到二维码原始链接内容
-        app.globalData.storeId = q
+        if (q && q!= 'undefined') {
+            app.globalData.storeId = q
+            wx.setStorageSync('storeId', q)
+        }
         this.getBanner()
         this.getChoices()
         setInterval(this.getChoices, 10000)
@@ -38,7 +41,8 @@ Page({
         http.get(api.getGoodsPage, {
             id_store: app.globalData.storeId,
             limit: 1000,
-            page: 1
+            page: 1,
+            tenantId: app.globalData.storeId
         }).then(res => {
             this.setData({
                 choiceItems: res.data || []

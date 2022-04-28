@@ -25,7 +25,7 @@ module.exports = {
   delCarItem: ApiRootUrl + '/water/cart/update',
 
   // 获取订单列表和押金列表
-  getOrderList: ApiRootUrl + '/water/order/querypage',
+  getOrderList: ApiRootUrl + '/water/order/querypageByApp',
 
   // 地址管理
   getAddress: ApiRootUrl + '/water/useraddress/querypage',
@@ -43,4 +43,7 @@ module.exports = {
 
   // 修改订单状态
   updateOrder: ApiRootUrl + '/water/order/update',
+
+  // 获取手机号
+  getUserPhoneNumber: ApiRootUrl + '/water/WxPay/getUserPhoneNumber',
 }

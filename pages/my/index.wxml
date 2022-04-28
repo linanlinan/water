@@ -28,4 +28,5 @@
       </view>
     </view>
   </view>
+  <view class="hideBtn" bindtap="clickhid"></view>
 </view>

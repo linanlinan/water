@@ -6,7 +6,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUseGetUserProfile: false,
-    phone: null
+    phone: null,
+    showModal: false,
   },
   onLoad() {
     if (wx.getUserProfile) {
@@ -27,11 +28,16 @@ Page({
     this.setGloabUserInfo(e.detail.userInfo)
   },
   setGloabUserInfo(data) {
+    console.log(data);
     wx.setStorage({
       key: 'userInfo',
       data: data
     })
     app.globalData.userInfo = data
+    this.setData({
+      userInfo: data,
+      showModal: true,
+    })
   },
 
   numberHandle(e) {
@@ -40,27 +46,36 @@ Page({
     })
   },
 
+  getPhoneNumber(e) {
+    wx.cloud.callFunction({
+      name: 'getPhone',
+      data: {
+        cloudID: e.detail.cloudID
+      }
+    }).then(res => {
+      let number = res.result.list[0].data.phoneNumber
+      this.setData({
+        phone: number
+      }, () => {
+        this.submit()
+      })
+    })
+  },
+
   submit() {
-    if(!app.globalData.userInfo) {
-      return wx.showToast({
-        title: '请获取头像昵称',
-        icon: 'none'
-      })
-    }
-    if (!this.data.phone || this.data.phone.length !== 11) {
-      return wx.showToast({
-        title: '输入正确手机号码',
-        icon: 'none'
-      })
-    }
     app.globalData.phone = this.data.phone
+    wx.setStorage({
+      key: 'phone',
+      data: app.globalData.phone
+    })
     http.get(api.addUser, {
-      openId: res.openId,
+      openId: app.globalData.openId,
       nickname: app.globalData.userInfo.nickName,
       avatarUrl: app.globalData.userInfo.avatarUrl,
       telephone: this.data.phone,
+      tenantId: app.globalData.storeId
     }).then(res => {
-      that.globalData.userId = res.id_user
+      app.globalData.userId = res.id_user
       wx.navigateBack()
     })
   }

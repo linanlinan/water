@@ -1,12 +1,25 @@
 <view class="container">
   <view class="userinfo">
+    <view class="user-info" wx:if="{{userInfo.avatarUrl}}">
+      <image src="{{userInfo.avatarUrl}}"></image>
+      <view class="user-name">{{userInfo.nickName}}</view>
+    </view>
     <block wx:if="{{!hasUserInfo}}">
       <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
       <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     </block>
-    <view class="btn-box">
+    <!-- <view class="btn-box">
       <input class="phone" type="number" name="" id="" bindinput="numberHandle" placeholder="请输入手机号码。。。"/>
       <button bindtap="submit">提交</button>
+    </view> -->
+  </view>
+  <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+    <view class="modal-dialog" wx:if="{{showModal}}">
+      <view class="p-box">
+        <view class="pb-top">绑定手机号</view>
+        <view class="pb-m">请先绑定手机号在进行此操作</view>
+        <button open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber"> 微信用户一键绑定 </button>
+      </view>
     </view>
   </view>
 </view>

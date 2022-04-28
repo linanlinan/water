@@ -31,6 +31,8 @@ function request(url, data = {}, method = "GET") {
       method: method,
       header: {
         'Content-Type': contentType,
+        'cookie': wx.getStorageSync('Set-Cookie'),
+        'tenantId': wx.getStorageSync('storeId')
         // 'Authorization': 'Bearer ' + getDataByKey('token')
       },
       success: function(res) {
@@ -42,6 +44,9 @@ function request(url, data = {}, method = "GET") {
             daesData = res.data
             if (daesData.code == 0 || (daesData.code == 200)) {
               //正常
+              if (res.header['Set-Cookie'] != '') {
+                wx.setStorageSync('Set-Cookie', res.header['Set-Cookie'])
+              }
               resolve(daesData.data);
             } else {
               //错误

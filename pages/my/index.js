@@ -4,6 +4,7 @@ var http = require('../../utils/http.js')
 Page( {
   data: {
     userInfo: {},
+    hideclickcount: 0,
     userListInfo: [
       {
         icon: '../../images/iconfont-dingdan.png',
@@ -11,7 +12,7 @@ Page( {
         router: '/pages/orderList/index'
       }, {
         icon: '../../images/iconfont-tuihuo.png',
-        text: '押金退还',
+        text: '押金记录',
         router: '/pages/refundList/index'
       }, {
         icon: '../../images/iconfont-kefu.png',
@@ -25,6 +26,9 @@ Page( {
   onLoad: function() {
   },
   onShow() {
+    this.setData({
+      hideclickcount: 0
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo
@@ -92,5 +96,22 @@ Page( {
     this.setData({
       showModal: false
     })
+  },
+  clickhid() {
+    let that = this
+    this.setData({
+      hideclickcount: this.data.hideclickcount + 1
+    })
+    if (this.data.hideclickcount > 10) {
+      wx.showModal({
+        title: '参数',
+        content: app.globalData.query,
+        success (res) {
+          that.setData({
+            hideclickcount: 0
+          })
+        }
+      })
+    }
   }
 })

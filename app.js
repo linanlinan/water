@@ -1,12 +1,22 @@
 //app.js
 var api = require('/config/api.js')
 var http = require('/utils/http.js')
+
+wx.cloud.init({
+  env: 'cloud1-5gpithc6243657d0',
+  traceUser: true,
+})
 App({
   onLaunch: function (query) {
+    this.globalData.query = JSON.stringify(query)
     const q = decodeURIComponent(query.query.id) // 获取到二维码原始链接内容
-    console.log(q);
-    this.globalData.storeId = q
+    this.globalData.storeId = wx.getStorageSync('storeId')
     this.globalData.userInfo = wx.getStorageSync('userInfo')
+    this.globalData.phone = wx.getStorageSync('phone')
+    if (q && q!= 'undefined') {
+      this.globalData.storeId = q
+      wx.setStorageSync('storeId', q)
+    }
     this.login()
   },
   login(){
@@ -49,6 +59,7 @@ App({
     userId: null,
     storeId: null,
     carList: [],
-    phone: null
+    phone: null,
+    query: null
   }
 })

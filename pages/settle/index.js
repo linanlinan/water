@@ -138,8 +138,9 @@ Page({
         recaddress: this.data.address,
         recuser: app.globalData.userId,
         adId: item.goodId,
-        isHaveYJ: this.data.selType == 1 ? '1' : '0',
-        recphone: app.globalData.phone
+        isHaveYJ:  this.data.selType == 1 ? '1' : '0',
+        recphone: app.globalData.phone,
+        cartId: item.id
       })
     }
     let total = this.data.selType == 1 ? (this.data.total + this.data.yjTotal) * 100 : this.data.total * 100
@@ -149,7 +150,7 @@ Page({
       orders: newList,
       needLog: true
     }).then(res => {
-      console.log(res);
+      console.log(newList);
       wx.requestPayment({
         provider: 'wxpay',
         nonceStr: res.nonceStr,
@@ -159,14 +160,22 @@ Page({
         timeStamp: res.timeStamp,
         success: function() {
           http.get(api.updateOrder, {
+            id: res.orderId,
+            status: '1'
+          })
+          http.get(api.updateOrder, {
             id: res.yjOrderId,
             status: '1'
           })
-          wx.navigateTo({
-            url: "index"
+          wx.switchTab({
+            url: "/pages/index/index"
           })
         },
         fail: function(err) {
+          http.get(api.updateOrder, {
+            id: res.orderId,
+            status: '7'
+          })
           http.get(api.updateOrder, {
             id: res.yjOrderId,
             status: '7'
@@ -201,6 +210,7 @@ Page({
     let total = 0
     for (const item of this.data.list) {
       let yj = await this.getYjByName(item.goodsname)
+      item.yajin = yj
       total += yj * item.salecount
     }
     this.setData({

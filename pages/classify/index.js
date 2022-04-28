@@ -19,7 +19,7 @@ Page({
                     navLeftItems: res.data,
                     curNav: first.id
                 })
-                this.getRightData(first.classname)
+                this.getRightData(first.id)
             }
             
         })
